@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pigment</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* =========================
+         ROOT (tu contrôles tout ici)
+         ========================= */
+
+      /* Assets */
+      --hero-image: url("images/HERO.jpg");
+      --logo-image: url("images/pigment_logo_transparent.png");
+
+      /* Menu overlay (fond + logo en fond) */
+      --menu-bg: #6e5e4e;
+      --menu-bg-logo-image: url("images/pigment_logo_transparent.png");
+      --menu-bg-logo-opacity: .10;
+      --menu-bg-logo-width: 1000px;
+      --menu-bg-logo-width-mobile: 760px;
+
+      /* Logo hero (centre) */
+      --logo-width: 320px;
+      --logo-width-mobile: 220px;
+      --logo-y: 0px;
+      --logo-opacity: 0.96;
+
+      /* Lisibilité hero */
+      --hero-overlay: radial-gradient(1200px 600px at 50% 20%, rgba(0,0,0,.15), rgba(0,0,0,.62));
+      --hero-scale: 1.03;
+      --hero-position: center;
+
+      /* Typo */
+      --font: "Libre Baskerville", serif;
+      --nav-font-size: 15px;
+      --nav-letter-spacing: .22em;
+
+      /* Taille menu (liens overlay) */
+      --menu-item-size: 28px;
+      --menu-item-letter-spacing: .22em;
+      --menu-gap: 26px;
+      --menu-top-offset: 0px;
+
+      /* Couleurs UI */
+      --ui-text: #dbd2b4;
+      --ui-border: rgba(219,210,180,.45);
+      --ui-bg: rgba(219,210,180,.06);
+      --ui-bg-hover: rgba(219,210,180,.12);
+
+      /* Placement (tu peux bouger ici) */
+      --top-y: 40px;
+      --side-x: 500px;
+
+      /* Bouton MENU */
+      --menu-x: var(--side-x);
+      --menu-y: var(--top-y);
+
+      /* Bouton RÉSERVATION */
+      --reserve-x: var(--side-x);
+      --reserve-y: var(--top-y);
+
+      /* Animations */
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --hover-lift: -1px;
+      --hover-scale: 1.02;
+
+      /* Burger */
+      --burger-w: 16px;
+      --burger-h: 12px;
+      --burger-stroke: 1.8px;
+
+      /* ================= SLIDE 1 ================= */
+
+      --slide1-bg: #75624f;
+
+      --img-bottle: url("images/bottle.jfif");
+      --img-bar: url("images/Bar.jpg");
+      --img-ombre: url("images/ombre.jfif");
+
+      --bottle-width: 320px;
+      --bottle-height: 440px;
+
+      --bar-width: 320px;
+      --bar-height: 440px;
+
+      --ombre-width: 320px;
+      --ombre-height: 440px;
+
+      --bottle-y: 0px;
+      --bar-y: -40px;
+      --ombre-y: 0px;
+
+      --slide1-title-size: 27px;
+      --slide1-text-size: 14.85px;
+      --slide1-text-width: 600px;
+
+      --slide1-content-x: -190px;
+      --slide1-content-y: -20px;
+
+      --slide1-text-align: left;
+
+      --slide1-btn-font-size: 12px;
+      --slide1-btn-padding: 10px 22px;
+      --slide1-btn-x: 400px;
+      --slide1-btn-y: 50px;
+
+      --slide1-btn-bg: transparent;
+      --slide1-btn-bg-hover: #dbd2b4;
+      --slide1-btn-text: #dbd2b4;
+      --slide1-btn-text-hover: #6e5e4e;
+      --slide1-btn-transition: .5s cubic-bezier(.2,.8,.2,1);
+
+      /* ================= SLIDE 2 (DANS SLIDE 1) ================= */
+
+      --slide2-in-slide1-top-gap: 140px;
+
+      --slide2-max: 1120px;
+      --slide2-gap: 120px;
+
+      --slide2-grid-x: 0px;
+      --slide2-grid-y: 0px;
+
+      --slide2-frame-w: 520px;
+      --slide2-frame-h: 520px;
+
+      --slide2-bar-img-w: 420px;
+      --slide2-bar-img-h: 520px;
+
+      --slide2-apts-img-w: 420px;
+      --slide2-apts-img-h: 520px;
+
+      --slide2-left-img-x: 0px;
+      --slide2-left-img-y: 0px;
+      --slide2-right-img-x: -52px;
+      --slide2-right-img-y: 0px;
+
+      --slide2-bar-align-x: center;
+      --slide2-bar-align-y: center;
+      --slide2-apts-align-x: center;
+      --slide2-apts-align-y: center;
+
+      /* ✅ IMPORTANT : cartes séparées (pour pas bouger les 2 d’un coup) */
+      --slide2-left-card-x: 0px;
+      --slide2-left-card-y: 0px;
+      --slide2-right-card-x: 0px;
+      --slide2-right-card-y: 0px;
+
+      --slide2-text-x: 65px;
+      --slide2-text-y: 0px;
+
+      /* ✅ gap entre les 2 textes uniquement */
+      --slide2-text-only-gap: -65px;
+
+      --slide2-title-size: 27px;
+      --slide2-desc-size: 14.85px;
+      --slide2-desc-width: 380px;
+      --slide2-title-mb: 10px;
+      --slide2-text-gap: 14px;
+
+      /* ================= SLIDE 3 (DANS SLIDE 1) ================= */
+
+      --slide3-top-gap: 160px;
+
+      --slide3-img-src: url("images/rooftop.png");
+      --slide3-img-max: 1120px;
+      --slide3-img-width: 100%;
+      --slide3-img-height: 640px;
+
+      --slide3-img-x: 0px;
+      --slide3-img-y: 0px;
+
+      --slide3-title-size: 27px;
+      --slide3-desc-size: 14.85px;
+      --slide3-desc-width: 720px;
+
+      --slide3-text-top: 30px;
+      --slide3-text-x: 0px;
+      --slide3-text-y: 0px;
+
+      /* ================= FOOTER / CONTACT ================= */
+
+      --footer-bg: #dbd2b4;
+      --footer-text: #6e5e4e;
+      --footer-max: 1120px;
+
+      --footer-padding-y: 90px;
+      --footer-padding-x: 28px;
+
+      --footer-title-size: 14px;
+      --footer-text-size: 13px;
+      --footer-letter-spacing: .18em;
+      --footer-line-height: 1.75;
+
+      --footer-cols-gap: 120px;
+      --footer-row-gap: 18px;
+
+      --footer-link-underline: 2px;
+      --footer-link-shift: 2px;
+
+      --footer-bottom-gap: 50px;
+      --footer-legal-size: 11px;
+
+      --footer-x: 0px;
+      --footer-y: 0px;
+
+      --footer-instagram-url: "https://www.instagram.com/pigment.marseille/?hl=fr";
+      --footer-maps-url: "https://maps.app.goo.gl/gQ8eb3U8B2DScZnr9";
+
+      /* ✅ Top UI descend/remonte au scroll */
+      --top-ui-start: 40px;
+      --top-ui-scrolled: 10px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    html{ scroll-behavior: smooth; }
+
+    body{
+      background:#000;
+      overflow-x:hidden;
+      overflow-y:auto;
+      font-family:var(--font);
+    }
+
+    a{ text-decoration:none; color:inherit; }
+
+    /* HERO plein écran */
+    .hero{
+      height:100vh;
+      width:100%;
+      position:relative;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--hero-overlay), var(--hero-image);
+      background-size: cover;
+      background-position: var(--hero-position);
+      transform: scale(var(--hero-scale));
+      z-index:-2;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      opacity:.07;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .logo{
+      width: var(--logo-width);
+      aspect-ratio: 3 / 1;
+      background: var(--logo-image) center/contain no-repeat;
+      opacity: var(--logo-opacity);
+      transform: translateY(var(--logo-y));
+      filter: drop-shadow(0 22px 60px rgba(0,0,0,.55));
+    }
+    @media (max-width: 520px){
+      .logo{ width: var(--logo-width-mobile); }
+    }
+
+    /* ✅ TOP UI (FIXED + ANIM AU SCROLL) */
+    .top-ui{
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: var(--top-ui-start);
+      z-index: 99999;
+      pointer-events: none;
+      transition: top .32s var(--ease);
+    }
+    .top-ui.scrolled{
+      top: var(--top-ui-scrolled);
+    }
+
+    .btn{
+      pointer-events:auto;
+      position:absolute;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+
+      font-family:var(--font);
+      font-size:var(--nav-font-size);
+      letter-spacing:var(--nav-letter-spacing);
+      text-transform:uppercase;
+      color:var(--ui-text);
+
+      user-select:none;
+      cursor:pointer;
+
+      transition:
+        transform .22s var(--ease),
+        opacity .22s var(--ease),
+        filter .22s var(--ease);
+    }
+
+    .btn-menu{
+      left: var(--menu-x);
+      top: var(--menu-y);
+      background: transparent;
+      border: none;
+      padding: 0;
+      height: auto;
+      border-radius: 0;
+      backdrop-filter:none;
+      opacity:.95;
+    }
+    .btn-menu:hover{
+      transform: translateY(var(--hover-lift));
+      opacity: 1;
+      filter: drop-shadow(0 14px 40px rgba(0,0,0,.35));
+    }
+    .btn-menu:active{ transform: translateY(0); opacity:.9; }
+
+    .btn-reserve{
+      right: var(--reserve-x);
+      top: var(--reserve-y);
+      height:34px;
+      padding:0 14px;
+      background:var(--ui-bg);
+      border:1px solid var(--ui-border);
+      border-radius:999px;
+      backdrop-filter: blur(8px);
+      transition:
+        transform .22s var(--ease),
+        background .22s var(--ease),
+        border-color .22s var(--ease),
+        box-shadow .22s var(--ease),
+        opacity .22s var(--ease);
+    }
+    .btn-reserve:hover{
+      background:var(--ui-bg-hover);
+      border-color:rgba(219,210,180,.62);
+      transform: translateY(var(--hover-lift)) scale(var(--hover-scale));
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.35),
+        0 0 0 6px rgba(219,210,180,.06);
+    }
+    .btn-reserve:active{ transform: translateY(0) scale(.99); box-shadow:none; }
+
+    .burger{
+      width:var(--burger-w);
+      height:var(--burger-h);
+      position:relative;
+      display:inline-block;
+      transform: translateY(-.5px);
+    }
+    .burger::before,
+    .burger::after{
+      content:"";
+      position:absolute;
+      left:0;
+      width:100%;
+      height:var(--burger-stroke);
+      border-radius:10px;
+      background: var(--ui-text);
+      transition: transform .28s var(--ease), top .28s var(--ease), opacity .28s var(--ease);
+    }
+    .burger::before{ top:2px; }
+    .burger::after{ top:8.5px; }
+
+    .btn-menu:hover .burger::before{ transform: translateX(2px); }
+    .btn-menu:hover .burger::after{ transform: translateX(-2px); }
+
+    .btn-menu.open .burger::before{ top:5.6px; transform: rotate(45deg); }
+    .btn-menu.open .burger::after{ top:5.6px; transform: rotate(-45deg); }
+
+    /* ---------- OVERLAY MENU ---------- */
+    .menu-overlay{
+      position: fixed;   /* ✅ au lieu de absolute */
+      inset:0;
+      z-index:20;
+      background: var(--menu-bg);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .28s var(--ease);
+    }
+    .menu-overlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .menu-overlay::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+      width: var(--menu-bg-logo-width);
+      max-width: 92vw;
+      aspect-ratio: 3 / 1;
+      background: var(--menu-bg-logo-image) center/contain no-repeat;
+      opacity: var(--menu-bg-logo-opacity);
+      pointer-events:none;
+    }
+    @media (max-width: 700px){
+      .menu-overlay::before{ width: var(--menu-bg-logo-width-mobile); }
+    }
+
+    .menu-content{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 120px 22px 60px;
+      transform: translateY(var(--menu-top-offset));
+    }
+
+    .menu-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: var(--menu-gap);
+      text-align:center;
+    }
+    .menu-list a{
+      font-size: var(--menu-item-size);
+      letter-spacing: var(--menu-item-letter-spacing);
+      text-transform:uppercase;
+      color: var(--ui-text);
+      opacity:.98;
+      transition: transform .22s var(--ease), opacity .22s var(--ease);
+      white-space:nowrap;
+    }
+    .menu-list a:hover{ transform: translateY(-1px); opacity:1; }
+
+    .btn:focus-visible, .menu-list a:focus-visible{
+      outline:2px solid rgba(219,210,180,.65);
+      outline-offset:3px;
+      border-radius:10px;
+    }
+
+    /* ================= SLIDE 1 ================= */
+
+    .slide1{
+      background: var(--slide1-bg);
+      min-height: 100vh;
+      padding: 140px 0 120px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:60px;
+    }
+
+    .slide1-images{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .img-box{ background-size:cover; background-position:center; }
+
+    .img-bottle{
+      width:var(--bottle-width);
+      height:var(--bottle-height);
+      background-image:var(--img-bottle);
+      transform:translateY(var(--bottle-y));
+    }
+    .img-bar{
+      width:var(--bar-width);
+      height:var(--bar-height);
+      background-image:var(--img-bar);
+      transform:translateY(var(--bar-y));
+    }
+    .img-ombre{
+      width:var(--ombre-width);
+      height:var(--ombre-height);
+      background-image:var(--img-ombre);
+      transform:translateY(var(--ombre-y));
+    }
+
+    .slide1-content{
+      color:var(--ui-text);
+      max-width:var(--slide1-text-width);
+      text-align: var(--slide1-text-align);
+      transform: translate(var(--slide1-content-x), var(--slide1-content-y));
+    }
+
+    .slide1-title{ font-size:var(--slide1-title-size); margin-bottom:16px; }
+    .slide1-text{ font-size:var(--slide1-text-size); line-height:1.6; opacity:.85; }
+
+    .slide1-btn{
+      margin-top:34px;
+      display:inline-block;
+      font-size: var(--slide1-btn-font-size);
+      padding: var(--slide1-btn-padding);
+      border-radius:40px;
+      border:1px solid var(--ui-border);
+      background: var(--slide1-btn-bg);
+      color: var(--slide1-btn-text);
+      transition: var(--slide1-btn-transition);
+      transform: translate(var(--slide1-btn-x), var(--slide1-btn-y));
+    }
+    .slide1-btn:hover{
+      background: var(--slide1-btn-bg-hover);
+      color: var(--slide1-btn-text-hover);
+      border-color: var(--slide1-btn-bg-hover);
+    }
+
+    /* ================= SLIDE 2 (DANS SLIDE 1) ================= */
+
+    .slide1 .slide2-grid{
+      width:100%;
+      max-width: var(--slide2-max);
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--slide2-gap);
+      align-items:start;
+
+      margin-top: var(--slide2-in-slide1-top-gap);
+      transform: translate(var(--slide2-grid-x), var(--slide2-grid-y));
+    }
+
+    .slide1 .slide2-card{
+      display:flex;
+      flex-direction:column;
+      gap: var(--slide2-text-gap);
+      transform: none;
+    }
+
+    .slide1 .slide2-left{
+      transform: translate(var(--slide2-left-card-x), var(--slide2-left-card-y));
+    }
+    .slide1 .slide2-right{
+      transform: translate(var(--slide2-right-card-x), var(--slide2-right-card-y));
+    }
+
+    .slide1 .slide2-imgwrap{
+      width: var(--slide2-frame-w);
+      height: var(--slide2-frame-h);
+      display:flex;
+      overflow:hidden;
+    }
+
+    .slide1 .slide2-imgreal{
+      display:block;
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide1 .slide2-imgwrap-bar{
+      transform: translate(var(--slide2-left-img-x), var(--slide2-left-img-y));
+      justify-content: var(--slide2-bar-align-x);
+      align-items: var(--slide2-bar-align-y);
+    }
+    .slide1 .slide2-imgwrap-bar .slide2-imgreal{
+      width: var(--slide2-bar-img-w);
+      height: var(--slide2-bar-img-h);
+    }
+
+    .slide1 .slide2-imgwrap-apts{
+      transform: translate(var(--slide2-right-img-x), var(--slide2-right-img-y));
+      justify-content: var(--slide2-apts-align-x);
+      align-items: var(--slide2-apts-align-y);
+    }
+    .slide1 .slide2-imgwrap-apts .slide2-imgreal{
+      width: var(--slide2-apts-img-w);
+      height: var(--slide2-apts-img-h);
+    }
+
+    .slide1 .slide2-text{
+      color: var(--ui-text);
+      text-align: left;
+      transform: translate(var(--slide2-text-x), var(--slide2-text-y));
+    }
+
+    .slide1 .slide2-title{
+      font-size: var(--slide2-title-size);
+      margin-bottom: var(--slide2-title-mb);
+    }
+
+    .slide1 .slide2-desc{
+      font-size: var(--slide2-desc-size);
+      line-height: 1.6;
+      opacity: .85;
+      max-width: var(--slide2-desc-width);
+    }
+
+    .slide1 .slide2-right .slide2-text{
+      transform: translate(
+        calc(var(--slide2-text-x) + var(--slide2-text-only-gap)),
+        var(--slide2-text-y)
+      );
+    }
+
+    @media (max-width: 980px){
+      .slide1 .slide2-grid{ grid-template-columns: 1fr; gap: 46px; }
+      .slide1 .slide2-imgwrap{ width: 100%; }
+      .slide1 .slide2-right .slide2-text{
+        transform: translate(var(--slide2-text-x), var(--slide2-text-y));
+      }
+    }
+
+    /* ================= SLIDE 3 (DANS SLIDE 1) ================= */
+
+    .slide1 .slide3{
+      width:100%;
+      max-width: var(--slide3-img-max);
+      margin: var(--slide3-top-gap) auto 0;
+    }
+
+    .slide1 .slide3-media{
+      width: var(--slide3-img-width);
+      height: var(--slide3-img-height);
+      margin: 0 auto;
+
+      background-image: var(--slide3-img-src);
+      background-size: cover;
+      background-position: center;
+
+      transform: translate(var(--slide3-img-x), var(--slide3-img-y));
+    }
+
+    .slide1 .slide3-text{
+      margin-top: var(--slide3-text-top);
+      color: var(--ui-text);
+      transform: translate(var(--slide3-text-x), var(--slide3-text-y));
+    }
+
+    .slide1 .slide3-title{
+      font-size: var(--slide3-title-size);
+      margin-bottom: 10px;
+    }
+
+    .slide1 .slide3-desc{
+      font-size: var(--slide3-desc-size);
+      line-height: 1.6;
+      opacity: .85;
+      max-width: var(--slide3-desc-width);
+    }
+
+    /* ================= FOOTER / CONTACT ================= */
+
+    .footer{
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: var(--footer-padding-y) var(--footer-padding-x);
+    }
+
+    .footer-inner{
+      width: 100%;
+      max-width: var(--footer-max);
+      margin: 0 auto;
+      transform: translate(var(--footer-x), var(--footer-y));
+    }
+
+    .footer-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--footer-cols-gap);
+      row-gap: var(--footer-row-gap);
+      align-items: start;
+    }
+
+    .footer-kicker{
+      font-size: var(--footer-title-size);
+      letter-spacing: var(--footer-letter-spacing);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: .95;
+    }
+
+    .footer-text{
+      font-size: var(--footer-text-size);
+      line-height: var(--footer-line-height);
+      opacity: .92;
+    }
+
+    .footer a{
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      transition: transform .25s var(--ease), opacity .25s var(--ease);
+    }
+
+    .footer a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-4px;
+      height: var(--footer-link-underline);
+      background: currentColor;
+      opacity: 0;
+      transform: scaleX(.6);
+      transform-origin: left;
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+    }
+
+    .footer a:hover{
+      transform: translateX(var(--footer-link-shift));
+      opacity: 1;
+    }
+    .footer a:hover::after{
+      opacity: .85;
+      transform: scaleX(1);
+    }
+
+    .footer-sep{
+      margin: var(--footer-bottom-gap) 0 18px;
+      height: 1px;
+      background: rgba(110,94,78,.25);
+    }
+
+    .footer-legal{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      font-size: var(--footer-legal-size);
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+
+    @media (max-width: 980px){
+      .footer-grid{
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .footer-legal{
+        flex-direction: column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-ui">
+    <button class="btn btn-menu" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
+      <span id="menuLabel">MENU</span>
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+
+    <a class="btn btn-reserve" href="reservation.html" aria-label="Réservation">
+      Réservation
+    </a>
+  </div>
+  <section class="hero">
+
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+      <div class="menu-content">
+        <ul class="menu-list">
+          <li><a href="immersion.html" data-close>Immersion en bord de mer</a></li>
+          <li><a href="bar.html" data-close>Le bar Pigment</a></li>
+          <li><a href="appartements.html" data-close>Les appartements Pigment</a></li>
+          <li><a href="rooftop.html" data-close>Le rooftop</a></li>
+          <li><a href="galerie.html" data-close>Galerie</a></li>
+          <li><a href="#contact" data-close>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="logo" aria-label="Pigment"></div>
+  </section>
+
+  <section class="slide1">
+    <!-- SLIDE 1 -->
+    <div class="slide1-images">
+      <div class="img-box img-bottle"></div>
+      <div class="img-box img-bar"></div>
+      <div class="img-box img-ombre"></div>
+    </div>
+
+    <div class="slide1-content">
+      <div class="slide1-title">Une immersion en bord de mer</div>
+      <div class="slide1-text">
+        Une adresse baignée de lumière sur la Corniche,
+        où l’on s’installe face à la Méditerranée,
+        entre douceur, chaleur et reflets dorés.
+      </div>
+      <a href="immersion.html" class="slide1-btn">Découvrir Pigment</a>
+    </div>
+
+    <!-- SLIDE 2 (dans slide1) -->
+    <div class="slide2-grid">
+      <a href="bar.html" class="slide2-card slide2-left">
+        <div class="slide2-imgwrap slide2-imgwrap-bar">
+          <img class="slide2-imgreal" src="images/window-1.jpg" alt="Le bar">
+        </div>
+        <div class="slide2-text">
+          <div class="slide2-title">Le bar</div>
+          <div class="slide2-desc">
+            Pigment réunit un bar ouvert sur la rue,<br>
+            pensé pour se retrouver à toute heure.
+          </div>
+        </div>
+      </a>
+
+      <article class="slide2-card slide2-right">
+        <div class="slide2-imgwrap slide2-imgwrap-apts">
+          <img class="slide2-imgreal" src="images/appart-temp-18.jpg" alt="Les appartements">
+        </div>
+        <div class="slide2-text">
+          <div class="slide2-title">Les appartements</div>
+          <div class="slide2-desc">
+            Ainsi que deux appartements au-dessus,<br>
+            pour prolonger l’expérience.
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- SLIDE 3 (dans slide1) -->
+    <div class="slide3">
+      <div class="slide3-media"></div>
+      <div class="slide3-text">
+        <div class="slide3-title">Le rooftop</div>
+        <div class="slide3-desc">
+          Au sommet, un rooftop baigné de soleil, suspendu entre ciel et mer,
+          où la lumière du soir vient embraser l’horizon.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-kicker">Pigment</div>
+          <div class="footer-text">
+            Bar &amp; appartements à Marseille.<br>
+            Une adresse baignée de lumière, entre mer et reflets dorés.
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-kicker">Adresse</div>
+          <div class="footer-text">
+            Corniche — Marseille<br>
+            <a data-maps href="#" target="_blank" rel="noopener">Voir sur Google Maps</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-kicker">Instagram</div>
+          <div class="footer-text">
+            <a data-instagram href="#" target="_blank" rel="noopener">@pigment</a>
+            <br>DM pour infos &amp; actus.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-sep"></div>
+
+      <div class="footer-legal">
+        <div>© <span id="year"></span> Pigment</div>
+        <div><a href="reservation.html">Réservation</a></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const menuLabel = document.getElementById('menuLabel');
+    const overlay = document.getElementById('menuOverlay');
+
+    const openMenu = () => {
+      menuBtn.classList.add('open');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      menuBtn.setAttribute('aria-expanded','true');
+      menuLabel.textContent = 'MENU';
+    };
+
+    const closeMenu = () => {
+      menuBtn.classList.remove('open');
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuLabel.textContent = 'MENU';
+    };
+
+    menuBtn.addEventListener('click', () => {
+      overlay.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target.matches('[data-close]')) closeMenu();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeMenu();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Liens depuis :root */
+    const root = getComputedStyle(document.documentElement);
+    const cleanVar = (name) => root.getPropertyValue(name).trim().replace(/^"(.*)"$/, "$1");
+
+    const instaUrl = cleanVar("--footer-instagram-url");
+    const mapsUrl  = cleanVar("--footer-maps-url");
+
+    const instaLink = document.querySelector("[data-instagram]");
+    const mapsLink  = document.querySelector("[data-maps]");
+
+    if (instaLink && instaUrl) instaLink.href = instaUrl;
+    if (mapsLink && mapsUrl)   mapsLink.href  = mapsUrl;
+
+    /* ✅ Scroll = la top-ui bouge */
+    const topUI = document.querySelector('.top-ui');
+    window.addEventListener('scroll', () => {
+      if (!topUI) return;
+      if (window.scrollY > 80) topUI.classList.add('scrolled');
+      else topUI.classList.remove('scrolled');
+    });
+  </script>
+</body>
+</html>

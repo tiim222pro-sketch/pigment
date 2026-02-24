@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pigment — Immersion</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Assets */
+      --immersion-hero-image: url("images/ombre.jfif"); /* <- mets ici ton image de hero immersion */
+      --logo-image: url("images/pigment_logo_transparent.png");
+
+      /* Menu overlay */
+      --menu-bg: #6e5e4e;
+      --menu-bg-logo-image: url("images/pigment_logo_transparent.png");
+      --menu-bg-logo-opacity: .10;
+      --menu-bg-logo-width: 1000px;
+      --menu-bg-logo-width-mobile: 760px;
+
+      /* Typo */
+      --font: "Libre Baskerville", serif;
+      --nav-font-size: 15px;
+      --nav-letter-spacing: .22em;
+
+      /* Taille menu overlay */
+      --menu-item-size: 28px;
+      --menu-item-letter-spacing: .22em;
+      --menu-gap: 26px;
+      --menu-top-offset: 0px;
+
+      /* Couleurs UI */
+      --ui-text: #dbd2b4;
+      --ui-border: rgba(219,210,180,.45);
+      --ui-bg: rgba(219,210,180,.06);
+      --ui-bg-hover: rgba(219,210,180,.12);
+
+      /* Placement */
+      --top-y: 40px;
+      --side-x: 500px;
+
+      --menu-x: var(--side-x);
+      --menu-y: var(--top-y);
+
+      --reserve-x: var(--side-x);
+      --reserve-y: var(--top-y);
+
+      /* Animations */
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --hover-lift: -1px;
+      --hover-scale: 1.02;
+
+      /* Burger */
+      --burger-w: 16px;
+      --burger-h: 12px;
+      --burger-stroke: 1.8px;
+
+      /* ✅ Top UI descend/remonte au scroll */
+      --top-ui-start: 40px;
+      --top-ui-scrolled: 10px;
+
+      /* Hero immersion */
+      --immersion-overlay: radial-gradient(1100px 700px at 50% 25%, rgba(0,0,0,.10), rgba(0,0,0,.55));
+      --immersion-scale: 1.03;
+      --immersion-position: center;
+      --immersion-title-size: 18px;
+      --immersion-title-letter: .06em;
+      /* ================= IMMERSION SLIDE 1 ================= */
+
+      --imm-s1-bg: #75624f;
+
+      --imm-s1-max: 1120px;
+      --imm-s1-gap: 80px;
+
+      --imm-s1-img-src: url("images/mer.jfif");
+      --imm-s1-img-w: 420px;
+      --imm-s1-img-h: 620px;
+
+      --imm-s1-box-w: 420px;
+      --imm-s1-box-h: 90px;
+
+      --imm-s1-text-size: 14.8px;
+      --imm-s1-text-width: 520px;
+      --imm-s1-line-height: 1.6;
+
+     
+      --imm-s1-padding-y: 140px;
+
+
+      /* ================= IMMERSION SLIDE 1 CONTROLS 2================= */
+
+      /* Image */
+      --imm-s1-img-w: 420px;
+      --imm-s1-img-h: 615px;
+      --imm-s1-img-x: 40px;
+      --imm-s1-img-y: 0px;
+
+      /* Rectangle */
+      --imm-s1-box-w: 420px;
+      --imm-s1-box-h: 90px;
+      --imm-s1-box-x: 40px;
+      --imm-s1-box-y: -20px;
+      --imm-s1-box-border: 1px;
+      --imm-s1-box-opacity: .6;
+
+      /* Texte */
+      --imm-s1-text-width: 520px;
+      --imm-s1-text-size: 14.8px;
+      --imm-s1-line-height: 1.6;
+      --imm-s1-text-x: -10px;
+      --imm-s1-text-y: 0px;
+      --imm-s1-text-opacity: .9;
+      --imm-s1-min-height: 100vh;
+      --imm-s1-vertical-center: center; /* center ou flex-start */
+    /* ================= FOOTER / CONTACT ================= */
+
+      --footer-bg: #dbd2b4;
+      --footer-text: #6e5e4e;
+      --footer-max: 1120px;
+
+      --footer-padding-y: 90px;
+      --footer-padding-x: 28px;
+
+      --footer-title-size: 14px;
+      --footer-text-size: 13px;
+      --footer-letter-spacing: .18em;
+      --footer-line-height: 1.75;
+
+      --footer-cols-gap: 120px;
+      --footer-row-gap: 18px;
+
+      --footer-link-underline: 2px;
+      --footer-link-shift: 2px;
+
+      --footer-bottom-gap: 50px;
+      --footer-legal-size: 11px;
+
+      --footer-x: 0px;
+      --footer-y: 0px;
+
+      --footer-instagram-url: "https://www.instagram.com/pigment.marseille/?hl=fr";
+      --footer-maps-url: "https://maps.app.goo.gl/gQ8eb3U8B2DScZnr9";
+
+      /* ===== ACTIONS (à la place du rectangle) ===== */
+      --imm-actions-x: 40px;
+      --imm-actions-y: -20px;
+      --imm-actions-gap: 18px;
+
+      /* Boutons */
+      --imm-btn-h: 44px;
+      --imm-btn-pad-x: 18px;
+      --imm-btn-font: 12px;
+      --imm-btn-letter: .18em;
+
+      --imm-btn-border: 1px;
+      --imm-btn-radius: 0px; /* 0 = carré comme ta ref */
+      --imm-btn-bg: transparent;
+      --imm-btn-text: #dbd2b4;
+      --imm-btn-border-color: rgba(219,210,180,.55);
+      --imm-btn-hover-bg: rgba(219,210,180,.10);
+      --imm-btn-hover-border: rgba(219,210,180,.80);
+      /* ===== POPUP CALL (variables) ===== */
+      --call-number: "+33 6 00 00 00 00";
+
+      --call-pop-bg: #6e5e4e;          /* taupe */
+      --call-pop-text: #dbd2b4;        /* sable */
+      --call-pop-border: rgba(219,210,180,.35);
+
+      --call-pop-w: 360px;
+      --call-pop-h: 170px;
+
+      --call-pop-x: 0px;              /* décale horizontalement */
+      --call-pop-y: 0px;              /* décale verticalement */
+
+      --call-pop-radius: 16px;
+      --call-pop-padding: 18px;
+
+      --call-pop-title-size: 12px;
+      --call-pop-title-letter: .18em;
+
+      --call-pop-number-size: 16px;
+      --call-pop-number-letter: .10em;
+
+
+    }
+
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background:#000;
+      overflow-x:hidden;
+      overflow-y:auto;
+      font-family:var(--font);
+    }
+    a{ text-decoration:none; color:inherit; }
+
+    /* ✅ TOP UI (IDENTIQUE INDEX) */
+    .top-ui{
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: var(--top-ui-start);
+      z-index: 99999;
+      pointer-events: none;
+      transition: top .32s var(--ease);
+    }
+    .top-ui.scrolled{ top: var(--top-ui-scrolled); }
+
+    .btn{
+      pointer-events:auto;
+      position:absolute;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+
+      font-family:var(--font);
+      font-size:var(--nav-font-size);
+      letter-spacing:var(--nav-letter-spacing);
+      text-transform:uppercase;
+      color:var(--ui-text);
+
+      user-select:none;
+      cursor:pointer;
+
+      transition:
+        transform .22s var(--ease),
+        opacity .22s var(--ease),
+        filter .22s var(--ease);
+    }
+
+    .btn-menu{
+      left: var(--menu-x);
+      top: var(--menu-y);
+      background: transparent;
+      border: none;
+      padding: 0;
+      height: auto;
+      border-radius: 0;
+      backdrop-filter:none;
+      opacity:.95;
+    }
+    .btn-menu:hover{
+      transform: translateY(var(--hover-lift));
+      opacity: 1;
+      filter: drop-shadow(0 14px 40px rgba(0,0,0,.35));
+    }
+    .btn-menu:active{ transform: translateY(0); opacity:.9; }
+
+    .btn-reserve{
+      right: var(--reserve-x);
+      top: var(--reserve-y);
+      height:34px;
+      padding:0 14px;
+      background:var(--ui-bg);
+      border:1px solid var(--ui-border);
+      border-radius:999px;
+      backdrop-filter: blur(8px);
+      transition:
+        transform .22s var(--ease),
+        background .22s var(--ease),
+        border-color .22s var(--ease),
+        box-shadow .22s var(--ease),
+        opacity .22s var(--ease);
+    }
+    .btn-reserve:hover{
+      background:var(--ui-bg-hover);
+      border-color:rgba(219,210,180,.62);
+      transform: translateY(var(--hover-lift)) scale(var(--hover-scale));
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.35),
+        0 0 0 6px rgba(219,210,180,.06);
+    }
+    .btn-reserve:active{ transform: translateY(0) scale(.99); box-shadow:none; }
+
+    .burger{
+      width:var(--burger-w);
+      height:var(--burger-h);
+      position:relative;
+      display:inline-block;
+      transform: translateY(-.5px);
+    }
+    .burger::before,
+    .burger::after{
+      content:"";
+      position:absolute;
+      left:0;
+      width:100%;
+      height:var(--burger-stroke);
+      border-radius:10px;
+      background: var(--ui-text);
+      transition: transform .28s var(--ease), top .28s var(--ease), opacity .28s var(--ease);
+    }
+    .burger::before{ top:2px; }
+    .burger::after{ top:8.5px; }
+
+    .btn-menu:hover .burger::before{ transform: translateX(2px); }
+    .btn-menu:hover .burger::after{ transform: translateX(-2px); }
+
+    .btn-menu.open .burger::before{ top:5.6px; transform: rotate(45deg); }
+    .btn-menu.open .burger::after{ top:5.6px; transform: rotate(-45deg); }
+
+    /* OVERLAY MENU */
+    .menu-overlay{
+      position: fixed;
+      inset:0;
+      z-index:20;
+      background: var(--menu-bg);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .28s var(--ease);
+    }
+    .menu-overlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .menu-overlay::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+      width: var(--menu-bg-logo-width);
+      max-width: 92vw;
+      aspect-ratio: 3 / 1;
+      background: var(--menu-bg-logo-image) center/contain no-repeat;
+      opacity: var(--menu-bg-logo-opacity);
+      pointer-events:none;
+    }
+    @media (max-width: 700px){
+      .menu-overlay::before{ width: var(--menu-bg-logo-width-mobile); }
+    }
+
+    .menu-content{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 120px 22px 60px;
+      transform: translateY(var(--menu-top-offset));
+    }
+
+    .menu-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: var(--menu-gap);
+      text-align:center;
+    }
+    .menu-list a{
+      font-size: var(--menu-item-size);
+      letter-spacing: var(--menu-item-letter-spacing);
+      text-transform:uppercase;
+      color: var(--ui-text);
+      opacity:.98;
+      transition: transform .22s var(--ease), opacity .22s var(--ease);
+      white-space:nowrap;
+    }
+    .menu-list a:hover{ transform: translateY(-1px); opacity:1; }
+
+    .btn:focus-visible, .menu-list a:focus-visible{
+      outline:2px solid rgba(219,210,180,.65);
+      outline-offset:3px;
+      border-radius:10px;
+    }
+
+    /* ✅ HERO IMMERSION */
+    .immersion-hero{
+      height:100vh;
+      width:100%;
+      position:relative;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .immersion-hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--immersion-overlay), var(--immersion-hero-image);
+      background-size: cover;
+      background-position: var(--immersion-position);
+      transform: scale(var(--immersion-scale));
+      z-index:-2;
+    }
+    .immersion-hero::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      opacity:.07;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .immersion-title{
+      color: var(--ui-text);
+      text-transform: none;
+      font-size: var(--immersion-title-size);
+      letter-spacing: var(--immersion-title-letter);
+      opacity: .9;
+      text-align:center;
+      padding: 0 18px;
+      transform: translateY(4px);
+      text-shadow: 0 18px 55px rgba(0,0,0,.55);
+    }
+    .top-logo{
+      position:absolute;
+      left:50%;
+      top: var(--top-y);
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background: var(--logo-image) center/contain no-repeat;
+      opacity:.9;
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+      pointer-events:auto;
+    }
+
+    .top-logo:hover{
+      opacity:1;
+      transform: translateX(-50%) scale(1.03);
+    }
+/* ================= IMMERSION SLIDE 1 (FIX CADRAGE) ================= */
+
+    .immersion-slide1{
+      background: var(--imm-s1-bg);
+      min-height: var(--imm-s1-min-height);
+      display:flex;
+      align-items: var(--imm-s1-vertical-center);
+      padding: 0;
+    }
+
+    .immersion-s1-inner{
+      width:100%;
+      max-width: var(--imm-s1-max);
+      margin: 0 auto;              /* ✅ centre le bloc */
+      padding: 0 90px;             /* ✅ marge intérieure comme ton screen */
+      display:flex;
+      gap: var(--imm-s1-gap);
+      align-items:flex-start;
+    }
+
+    .immersion-s1-left{
+      width: var(--imm-s1-img-w);  /* ✅ empêche l’image de s’étirer */
+      flex: 0 0 var(--imm-s1-img-w);
+      display:flex;
+      flex-direction:column;
+      gap:40px;
+    }
+
+    /* IMAGE */
+    .immersion-s1-image{
+      width: var(--imm-s1-img-w);
+      height: var(--imm-s1-img-h);
+      background-image: var(--imm-s1-img-src);
+      background-size: cover;
+      background-position: center;
+      transform: translate(var(--imm-s1-img-x), var(--imm-s1-img-y));
+    }
+
+    /* RECTANGLE */
+    /* ===== ACTIONS (remplace le rectangle) ===== */
+    .immersion-s1-actions{
+      display:flex;
+      gap: var(--imm-actions-gap);
+      transform: translate(var(--imm-actions-x), var(--imm-actions-y));
+    }
+
+    .imm-btn{
+      height: var(--imm-btn-h);
+      padding: 0 var(--imm-btn-pad-x);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size: var(--imm-btn-font);
+      letter-spacing: var(--imm-btn-letter);
+      text-transform: uppercase;
+      color: var(--imm-btn-text);
+
+      background: var(--imm-btn-bg);
+      border: var(--imm-btn-border) solid var(--imm-btn-border-color);
+      border-radius: var(--imm-btn-radius);
+
+      transition: transform .22s var(--ease), background .22s var(--ease), border-color .22s var(--ease), opacity .22s var(--ease);
+    }
+
+    .imm-btn:hover{
+      background: var(--imm-btn-hover-bg);
+      border-color: var(--imm-btn-hover-border);
+      transform: translateY(-1px);
+    }
+
+    .imm-btn:active{ transform: translateY(0); opacity:.95; }
+
+    /* Si tu veux différencier légèrement les 2 boutons */
+    .imm-btn-primary{ }
+    .imm-btn-ghost{ opacity:.95; }
+
+    /* TEXTE */
+    .immersion-s1-right{
+      max-width: var(--imm-s1-text-width);
+    }
+
+    .immersion-s1-text{
+      font-size: var(--imm-s1-text-size);
+      line-height: var(--imm-s1-line-height);
+      color: var(--ui-text);
+      opacity: var(--imm-s1-text-opacity);
+      transform: translate(var(--imm-s1-text-x), var(--imm-s1-text-y));
+    }
+    /* ✅ Responsive */
+    @media (max-width: 980px){
+      .immersion-s1-inner{
+        padding: 0 28px;
+        flex-direction:column;
+        gap: 40px;
+      }
+      .immersion-s1-left{
+        width: 100%;
+        flex: 0 0 auto;
+      }
+      .immersion-s1-image,
+      .immersion-s1-box{
+        width: 100%;
+      }
+    }
+
+    /* ================= FOOTER / CONTACT ================= */
+
+    .footer{
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: var(--footer-padding-y) var(--footer-padding-x);
+    }
+
+    .footer-inner{
+      width: 100%;
+      max-width: var(--footer-max);
+      margin: 0 auto;
+      transform: translate(var(--footer-x), var(--footer-y));
+    }
+
+    .footer-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--footer-cols-gap);
+      row-gap: var(--footer-row-gap);
+      align-items: start;
+    }
+
+    .footer-kicker{
+      font-size: var(--footer-title-size);
+      letter-spacing: var(--footer-letter-spacing);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: .95;
+    }
+
+    .footer-text{
+      font-size: var(--footer-text-size);
+      line-height: var(--footer-line-height);
+      opacity: .92;
+    }
+
+    .footer a{
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      transition: transform .25s var(--ease), opacity .25s var(--ease);
+    }
+
+    .footer a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-4px;
+      height: var(--footer-link-underline);
+      background: currentColor;
+      opacity: 0;
+      transform: scaleX(.6);
+      transform-origin: left;
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+    }
+
+    .footer a:hover{
+      transform: translateX(var(--footer-link-shift));
+      opacity: 1;
+    }
+    .footer a:hover::after{
+      opacity: .85;
+      transform: scaleX(1);
+    }
+
+    .footer-sep{
+      margin: var(--footer-bottom-gap) 0 18px;
+      height: 1px;
+      background: rgba(110,94,78,.25);
+    }
+
+    .footer-legal{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      font-size: var(--footer-legal-size);
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+
+    @media (max-width: 980px){
+      .footer-grid{
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .footer-legal{
+        flex-direction: column;
+        align-items:flex-start;
+      }
+    }
+    /* BOOK ONLINE disabled */
+    .imm-btn-disabled{
+      opacity:.45;
+      cursor: default;
+      pointer-events:none;
+    }
+
+    /* ===== POPUP CALL ===== */
+    .call-pop{
+      position: fixed;
+      inset: 0;
+      z-index: 999999; /* au-dessus */
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s var(--ease);
+    }
+
+    .call-pop.open{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .call-pop-inner{
+      width: var(--call-pop-w);
+      height: var(--call-pop-h);
+      background: var(--call-pop-bg);
+      color: var(--call-pop-text);
+      border: 1px solid var(--call-pop-border);
+      border-radius: var(--call-pop-radius);
+      padding: var(--call-pop-padding);
+      position: relative;
+      transform: translate(var(--call-pop-x), var(--call-pop-y));
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
+    }
+
+    .call-pop-close{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(219,210,180,.25);
+      background: rgba(219,210,180,.06);
+      color: var(--call-pop-text);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      display:grid;
+      place-items:center;
+      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+    }
+    .call-pop-close:hover{
+      transform: translateY(-1px);
+      background: rgba(219,210,180,.12);
+      border-color: rgba(219,210,180,.45);
+    }
+
+    .call-pop-title{
+      font-size: var(--call-pop-title-size);
+      letter-spacing: var(--call-pop-title-letter);
+      text-transform: uppercase;
+      opacity: .9;
+      margin-top: 6px;
+    }
+
+    .call-pop-number{
+      margin-top: 18px;
+      font-size: var(--call-pop-number-size);
+      letter-spacing: var(--call-pop-number-letter);
+      opacity: .95;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOP UI identique -->
+  <div class="top-ui">
+    <button class="btn btn-menu" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
+      <span id="menuLabel">MENU</span>
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+
+    <a href="index.html" class="top-logo" aria-label="Accueil Pigment"></a>
+
+    <a class="btn btn-reserve" href="reservation.html" aria-label="Réservation">
+      Réservation
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <section class="immersion-hero">
+    <!-- Overlay menu identique -->
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+      <div class="menu-content">
+        <ul class="menu-list">
+          <li><a href="immersion.html" data-close>Immersion en bord de mer</a></li>
+          <li><a href="bar.html" data-close>Le bar Pigment</a></li>
+          <li><a href="appartements.html" data-close>Les appartements Pigment</a></li>
+          <li><a href="rooftop.html" data-close>Le rooftop</a></li>
+          <li><a href="galerie.html" data-close>Galerie</a></li>
+          <li><a href="index.html#contact" data-close>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="immersion-title">Immersion en bord de mer</div>
+  </section>
+  <section class="immersion-slide1">
+    <div class="immersion-s1-inner">
+
+      <div class="immersion-s1-left">
+        <div class="immersion-s1-image"></div>
+        <div class="immersion-s1-actions">
+          <span class="imm-btn imm-btn-disabled" aria-disabled="true">BOOK ONLINE</span>
+          <button class="imm-btn imm-btn-call" id="callBtn" type="button">CALL</button>
+        </div>
+
+        <!-- POPUP CALL -->
+        <div class="call-pop" id="callPop" aria-hidden="true">
+          <div class="call-pop-inner" role="dialog" aria-label="Téléphone">
+            <button class="call-pop-close" id="callClose" type="button" aria-label="Fermer">×</button>
+            <div class="call-pop-title">Téléphone</div>
+            <div class="call-pop-number" id="callNumberText"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="immersion-s1-right">
+        <div class="immersion-s1-text">
+          Pigment, c’est la trace laissée par le soleil
+          sur la peau, cette teinte dorée qui raconte
+          les journées passées dehors, bercées par la lumière.
+          <br><br>
+          Une empreinte solaire, douce et chaude,
+          comme un souvenir d’été inscrit sur l’épiderme.
+          <br><br>
+          C’est l’éclat du jour qui s’attarde sur l’eau,
+          le scintillement des reflets changeants,
+          entre or et cuivre.
+          <br><br>
+          Pigment, c’est aussi cette vibration chromatique
+          qui traverse le paysage en fin de journée,
+          lorsque le soleil décline et que les ombres s’étirent.
+          <br><br>
+          C’est le rayonnement d’un instant suspendu,
+          la poésie d’un éclat, la sensualité d’une
+          couleur vivante, en perpétuel dialogue avec
+          la lumière.
+          <br><br>
+          C’est l’été qui s’étire, la chaleur qui
+          caresse, la lumière rouge-orangé qui
+          embrase le ciel avant de céder la place à la
+          douceur des longues soirées.
+          <br><br>
+          C’est une sensation, un souvenir, un éclat
+          de couleur qui prolonge le jour et invite à
+          savourer l’instant.
+          <br><br>
+          Dans les lieux comme dans l’air, Pigment
+          évoque ce goût de l’été, cette intensité
+          lumineuse et chaleureuse qui transforme
+          chaque moment en une parenthèse
+          ensoleillée.
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-kicker">Pigment</div>
+          <div class="footer-text">
+            Bar &amp; appartements à Marseille.<br>
+            Une adresse baignée de lumière, entre mer et reflets dorés.
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-kicker">Adresse</div>
+          <div class="footer-text">
+            Corniche — Marseille<br>
+            <a data-maps href="#" target="_blank" rel="noopener">Voir sur Google Maps</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-kicker">Instagram</div>
+          <div class="footer-text">
+            <a data-instagram href="#" target="_blank" rel="noopener">@pigment</a>
+            <br>DM pour infos &amp; actus.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-sep"></div>
+
+      <div class="footer-legal">
+        <div>© <span id="year"></span> Pigment</div>
+        <div><a href="reservation.html">Réservation</a></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const menuLabel = document.getElementById('menuLabel');
+    const overlay = document.getElementById('menuOverlay');
+
+    const openMenu = () => {
+      menuBtn.classList.add('open');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      menuBtn.setAttribute('aria-expanded','true');
+      menuLabel.textContent = 'MENU';
+    };
+
+    const closeMenu = () => {
+      menuBtn.classList.remove('open');
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuLabel.textContent = 'MENU';
+    };
+
+    menuBtn.addEventListener('click', () => {
+      overlay.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target.matches('[data-close]')) closeMenu();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeMenu();
+    });
+
+    /* ✅ Scroll = la top-ui bouge (identique) */
+    const topUI = document.querySelector('.top-ui');
+    window.addEventListener('scroll', () => {
+      if (!topUI) return;
+      if (window.scrollY > 80) topUI.classList.add('scrolled');
+      else topUI.classList.remove('scrolled');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const root = getComputedStyle(document.documentElement);
+    const cleanVar = (name) => root.getPropertyValue(name).trim().replace(/^"(.*)"$/, "$1");
+
+    const instaUrl = cleanVar("--footer-instagram-url");
+    const mapsUrl  = cleanVar("--footer-maps-url");
+
+    const instaLink = document.querySelector("[data-instagram]");
+    const mapsLink  = document.querySelector("[data-maps]");
+
+    if (instaLink && instaUrl) instaLink.href = instaUrl;
+    if (mapsLink && mapsUrl)   mapsLink.href  = mapsUrl;
+    // ===== CALL POPUP =====
+    const callBtn = document.getElementById('callBtn');
+    const callPop = document.getElementById('callPop');
+    const callClose = document.getElementById('callClose');
+
+    const rootStyle = getComputedStyle(document.documentElement);
+    const cleanVar2 = (name) => rootStyle.getPropertyValue(name).trim().replace(/^"(.*)"$/, "$1");
+    const callNumber = cleanVar2("--call-number");
+
+    const callNumberText = document.getElementById('callNumberText');
+    if (callNumberText) callNumberText.textContent = callNumber;
+
+    const openCall = () => {
+      callPop.classList.add('open');
+      callPop.setAttribute('aria-hidden','false');
+    };
+
+    const closeCall = () => {
+      callPop.classList.remove('open');
+      callPop.setAttribute('aria-hidden','true');
+    };
+
+    if (callBtn) callBtn.addEventListener('click', openCall);
+    if (callClose) callClose.addEventListener('click', closeCall);
+
+    // clique dehors = ferme
+    if (callPop) callPop.addEventListener('click', (e) => {
+      if (e.target === callPop) closeCall();
+    });
+
+    // ESC = ferme
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && callPop.classList.contains('open')) closeCall();
+    });
+  </script>
+</body>
+</html>
