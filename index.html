@@ -753,6 +753,17 @@
 </head>
 
 <body>
+  <script>
+    const password = "Pigment1236"; // CHANGE ICI
+  
+    const userPassword = prompt("Mot de passe requis");
+  
+    if (userPassword !== password) {
+      document.body.innerHTML = "";
+      alert("Accès refusé");
+      window.location.href = "https://google.com";
+    }
+  </script>
   <div class="top-ui">
     <button class="btn btn-menu" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
       <span id="menuLabel">MENU</span>
@@ -941,3 +952,4 @@
 </body>
 
 </html>
+
